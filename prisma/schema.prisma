@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  
+}
+
+// Un atelier = un tenant. Chaque couturier inscrit crée un atelier.
+model Atelier {
+  id        String   @id @default(uuid())
+  nom       String
+  createdAt DateTime @default(now())
+
+  utilisateurs Utilisateur[]
+  clients      Client[]
+  modeles      ModeleDeMesure[]
+
+  @@map("ateliers")
+}
+
+// Lié à l'utilisateur Supabase Auth via supabaseUserId
+model Utilisateur {
+  id             String   @id @default(uuid())
+  supabaseUserId String   @unique
+  email          String   @unique
+  nom            String?
+  role           Role     @default(PROPRIETAIRE)
+  createdAt      DateTime @default(now())
+
+  atelierId String
+  atelier   Atelier @relation(fields: [atelierId], references: [id], onDelete: Cascade)
+
+  @@map("utilisateurs")
+}
+
+enum Role {
+  PROPRIETAIRE
+  EMPLOYE
+}
+
+model Client {
+  id        String   @id @default(uuid())
+  nom       String
+  telephone String?
+  adresse   String?
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  atelierId String
+  atelier   Atelier @relation(fields: [atelierId], references: [id], onDelete: Cascade)
+
+  fiches FicheDeMesure[]
+
+  @@map("clients")
+}
+
+// Modèle de vêtement réutilisable (Robe, Costume...) — les champs sont stockés en JSON
+// pour permettre les champs personnalisés sans changer le schéma.
+model ModeleDeMesure {
+  id        String   @id @default(uuid())
+  nom       String
+  champs    Json // ex: ["Tour de poitrine", "Tour de taille", ...]
+  createdAt DateTime @default(now())
+
+  atelierId String
+  atelier   Atelier @relation(fields: [atelierId], references: [id], onDelete: Cascade)
+
+  fiches FicheDeMesure[]
+
+  @@map("modeles_de_mesure")
+}
+
+model FicheDeMesure {
+  id         String   @id @default(uuid())
+  valeurs    Json // ex: { "Tour de poitrine": "92,4", "Tour de taille": "74,0" }
+  unite      String   @default("cm")
+  commentaire String?
+  version    Int      @default(1)
+  createdAt  DateTime @default(now())
+
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  modeleId String?
+  modele   ModeleDeMesure? @relation(fields: [modeleId], references: [id])
+
+  nomModeleLibre String? // si le couturier tape un nom de modèle personnalisé au lieu de choisir un ModeleDeMesure
+
+  @@map("fiches_de_mesure")
+}
