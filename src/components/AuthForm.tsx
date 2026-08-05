@@ -38,23 +38,23 @@ export default function AuthForm() {
   }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setLoading(true);
-    const supabase = createClient();
-    const { error } = await supabase.auth.signInWithPassword({
-      email: loginEmail,
-      password: loginPassword,
-    });
-    setLoading(false);
-    if (error) {
-      setError("E-mail ou mot de passe incorrect.");
-      return;
-    }
-    router.push("/dashboard");
-    router.refresh();
-  };
-
+  e.preventDefault();
+  setError(null);
+  setLoading(true);
+  const res = await fetch("/api/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email: loginEmail, password: loginPassword }),
+  });
+  const data = await res.json();
+  setLoading(false);
+  if (!res.ok) {
+    setError(data.error ?? "E-mail ou mot de passe incorrect.");
+    return;
+  }
+  router.push("/dashboard");
+  router.refresh();
+};
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -75,12 +75,15 @@ export default function AuthForm() {
       return;
     }
 
-    // Connecter automatiquement l'utilisateur après inscription
-    const supabase = createClient();
-    await supabase.auth.signInWithPassword({ email: signupEmail, password: signupPassword });
-    setLoading(false);
-    router.push("/dashboard");
-    router.refresh();
+    // Connecter automatiquement l'utilisateur après inscription (via le serveur, plus fiable sur mobile)
+await fetch("/api/login", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ email: signupEmail, password: signupPassword }),
+});
+setLoading(false);
+router.push("/dashboard");
+router.refresh();
   };
 
   return (

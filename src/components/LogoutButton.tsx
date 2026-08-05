@@ -1,17 +1,15 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
+//import { createClient } from "@/lib/supabase/client";
 
 export default function LogoutButton() {
   const router = useRouter();
 
-  const handleLogout = async () => {
-    const supabase = createClient();
-    await supabase.auth.signOut();
-    router.push("/auth");
-    router.refresh();
-  };
-
+const handleLogout = async () => {
+  await fetch("/api/logout", { method: "POST" });
+  router.push("/auth");
+  router.refresh();
+};
   return (
     <button className="btn-ghost" onClick={handleLogout} type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
