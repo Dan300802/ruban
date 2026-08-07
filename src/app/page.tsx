@@ -1,4 +1,5 @@
 import TapeMeasureEffects from "@/components/TapeMeasureEffects";
+import NotebookAnimation from "@/components/NotebookAnimation";
 
 export default function Home() {
   return (
@@ -17,11 +18,14 @@ export default function Home() {
             Ruban
           </div>
           <div className="nav-links">
-            <a className="ghost" href="#probleme">Le problème</a>
-            <a className="ghost" href="#fonctionnalites">Fonctionnalités</a>
-            <a className="ghost" href="#fonctionnement">Comment ça marche</a>
-            <a className="btn btn-outline" href="/auth">Connexion</a>
-           <a className="btn btn-primary" href="/auth">Essayer gratuitement</a>
+           <div className="nav-links">
+  <a className="ghost" href="#probleme">Le problème</a>
+  <a className="ghost" href="#fonctionnalites">Fonctionnalités</a>
+  <a className="ghost" href="#fonctionnement">Comment ça marche</a>
+  <a className="ghost" href="/pricing">Tarifs</a>
+  <a className="btn btn-outline" href="/auth">Connexion</a>
+  <a className="btn btn-primary" href="/auth">Essayer gratuitement</a>
+</div>
           </div>
         </div>
       </nav>
@@ -41,17 +45,7 @@ export default function Home() {
               <a className="btn btn-outline" href="#fonctionnement">Voir comment ça marche</a>
             </div>
           </div>
-          <div className="measure-card" data-reveal>
-            <span className="tag">Fiche de mesure — Aïcha K.</span>
-            <div className="measure-row"><span className="label">Tour de poitrine</span><span className="val">92,4 cm</span></div>
-            <div className="measure-row"><span className="label">Tour de taille</span><span className="val">74,0 cm</span></div>
-            <div className="measure-row"><span className="label">Longueur robe</span><span className="val">128,5 cm</span></div>
-            <div className="measure-row"><span className="label">Tour de hanches</span><span className="val">98,2 cm</span></div>
-            <div className="measure-foot">
-              <span><span className="pulse-dot"></span>Sauvegardé automatiquement</span>
-              <span>v4 — 12 juil. 2026</span>
-            </div>
-          </div>
+          <NotebookAnimation />
         </div>
         <div className="tape-divider" aria-hidden="true">
           <svg viewBox="0 0 1120 34" preserveAspectRatio="none">

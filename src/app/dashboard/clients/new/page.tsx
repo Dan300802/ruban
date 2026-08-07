@@ -10,24 +10,27 @@ export default function NewClientPage() {
   const [notes, setNotes] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [limitReached, setLimitReached] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setLoading(true);
-    const res = await fetch("/api/clients", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nom, telephone, notes }),
-    });
-    const data = await res.json();
-    setLoading(false);
-    if (!res.ok) {
-      setError(data.error ?? "Une erreur est survenue.");
-      return;
-    }
-    router.push(`/dashboard/clients/${data.client.id}`);
-  };
+  e.preventDefault();
+  setError(null);
+  setLimitReached(false);
+  setLoading(true);
+  const res = await fetch("/api/clients", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nom, telephone, notes }),
+  });
+  const data = await res.json();
+  setLoading(false);
+  if (!res.ok) {
+    setError(data.error ?? "Une erreur est survenue.");
+    if (data.limitReached) setLimitReached(true);
+    return;
+  }
+  router.push(`/dashboard/clients/${data.client.id}`);
+};
 
   return (
     <div className="wrap-outer">
@@ -70,6 +73,11 @@ export default function NewClientPage() {
               <input id="notes" type="text" value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Préférences, remarques…" />
             </div>
             {error && <p style={{ color: "#A13D3D", fontSize: 13, marginBottom: 14 }}>{error}</p>}
+            {limitReached && (
+  <Link href="/pricing" style={{ color: "var(--brass)", fontWeight: 700, fontSize: 13, display: "block", marginBottom: 14 }}>
+    Voir le plan Atelier →
+  </Link>
+)}
             <button className="btn-submit" type="submit" disabled={loading}>
               {loading ? "Création…" : "Créer le client"}
             </button>
