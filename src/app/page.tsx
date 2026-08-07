@@ -1,34 +1,13 @@
 import TapeMeasureEffects from "@/components/TapeMeasureEffects";
-import NotebookAnimation from "@/components/NotebookAnimation";
+import NotebookAnimation from "@/components/NotebookAnimation"
+import NavBar from "@/components/NavBar";
 
 export default function Home() {
   return (
     <>
       <TapeMeasureEffects />
 
-      <nav>
-        <div className="wrap">
-          <div className="logo">
-            <span className="logo-mark">
-              <svg viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="10" stroke="#B9873E" strokeWidth="1.6" />
-                <path d="M12 7v5l3.2 1.8" stroke="#B9873E" strokeWidth="1.6" strokeLinecap="round" />
-              </svg>
-            </span>
-            Ruban
-          </div>
-          <div className="nav-links">
-           <div className="nav-links">
-  <a className="ghost" href="#probleme">Le problème</a>
-  <a className="ghost" href="#fonctionnalites">Fonctionnalités</a>
-  <a className="ghost" href="#fonctionnement">Comment ça marche</a>
-  <a className="ghost" href="/pricing">Tarifs</a>
-  <a className="btn btn-outline" href="/auth">Connexion</a>
-  <a className="btn btn-primary" href="/auth">Essayer gratuitement</a>
-</div>
-          </div>
-        </div>
-      </nav>
+      <NavBar />
 
       <section className="hero">
         <div className="wrap hero-inner">

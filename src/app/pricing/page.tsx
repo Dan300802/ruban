@@ -1,26 +1,11 @@
 import Link from "next/link";
 import PricingTape from "@/components/PricingTape";
+import NavBar from "@/components/NavBar";
 
 export default function PricingPage() {
   return (
     <>
-      <nav>
-        <div className="wrap">
-          <div className="logo">
-            <svg viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="10" stroke="#B9873E" strokeWidth="1.6" />
-              <path d="M12 7v5l3.2 1.8" stroke="#B9873E" strokeWidth="1.6" strokeLinecap="round" />
-            </svg>
-            Ruban
-          </div>
-          <div className="nav-links">
-            <Link className="ghost" href="/">Accueil</Link>
-            <Link className="ghost" href="/#fonctionnalites">Fonctionnalités</Link>
-            <Link className="btn btn-outline" href="/auth">Connexion</Link>
-            <Link className="btn btn-primary" href="/auth">Essayer gratuitement</Link>
-          </div>
-        </div>
-      </nav>
+      <NavBar />
 
       <section className="hero" style={{ background: "var(--linen)", padding: "80px 0 40px", textAlign: "center" }}>
         <div className="wrap">
