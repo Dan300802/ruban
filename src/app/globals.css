@@ -575,3 +575,34 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 @media(max-width:760px){
   .plans{grid-template-columns:1fr;}
 }
+/* ==========================================================================
+   ADMIN
+   ========================================================================== */
+
+.admin-wrap{max-width:1100px;margin:0 auto;padding:40px 32px 80px;background:var(--linen);min-height:100vh;}
+.admin-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:30px;flex-wrap:wrap;gap:14px;}
+.admin-header h1{font-size:26px;font-weight:600;color:var(--ink);}
+
+.admin-table{background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden;}
+.admin-row{
+  display:grid;grid-template-columns:1.4fr 1.6fr 0.7fr 1fr 1fr 1.2fr;
+  align-items:center;padding:14px 20px;border-bottom:1px solid var(--line);gap:10px;font-size:13.5px;
+}
+.admin-row:last-child{border-bottom:none;}
+.admin-row-head{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;
+  color:#8A8060;background:var(--linen-dim);
+}
+.admin-nom{font-weight:700;color:var(--ink);}
+.admin-email{color:#5A5A54;font-family:'IBM Plex Mono',monospace;font-size:12.5px;}
+
+.admin-plan-badge{
+  display:inline-flex;padding:4px 11px;border-radius:20px;font-size:11.5px;font-weight:700;
+}
+.admin-plan-badge.decouverte{background:#EFEAE0;color:#8A8060;}
+.admin-plan-badge.atelier{background:#E7F3EA;color:#3B8654;}
+
+@media(max-width:900px){
+  .admin-row{grid-template-columns:1fr 1fr;grid-auto-rows:auto;}
+  .admin-row-head{display:none;}
+}
