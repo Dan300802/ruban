@@ -53,9 +53,13 @@ export default function PricingPage() {
               <li><CheckIcon /> Export PDF des fiches</li>
               <li><CheckIcon /> Jusqu&apos;à 3 comptes employés</li>
             </ul>
-            <a className="btn btn-primary" href="mailto:contact@ruban.app?subject=Passer au plan Atelier">
-              Nous contacter
-            </a>
+            <a  className="btn btn-primary"
+  href="https://wa.me/22893585917?text=Bonjour%2C%20je%20souhaite%20passer%20au%20plan%20Atelier%20de%20Ruban%20(1%20000%20FCFA%2Fmois)."
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Nous contacter
+</a>
           </div>
         </div>
       </section>

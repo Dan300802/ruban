@@ -18,12 +18,9 @@ export default function NotebookAnimation() {
 
       <div className="notebook-cover">
         <div className="nc-logo">
-          <svg viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="10" stroke="#B9873E" strokeWidth="1.6" />
-            <path d="M12 7v5l3.2 1.8" stroke="#B9873E" strokeWidth="1.6" strokeLinecap="round" />
-          </svg>
-          Ruban
-        </div>
+  <img src="/logo-nav.png" alt="Ruban" style={{ width: 26, height: 26, objectFit: "contain" }} />
+  Ruban
+</div>
         <div className="nc-tagline">Carnet de mesures</div>
       </div>
     </div>
